@@ -1,5 +1,7 @@
-import mongoose from "mongoose"; // Erase if already required
+import mongoose from "mongoose";
 import bcrypt from 'bcrypt'
+
+
 // Declare the Schema of the Mongo model
 var userSchema = new mongoose.Schema({
     firstName:{
@@ -29,8 +31,28 @@ var userSchema = new mongoose.Schema({
     role:{
         type:String,
         default:`user`
-    }
-});
+    },
+    isBlocked:{
+        type: Boolean,
+        default: false
+    },
+    cart:{
+        type:Array,
+        default:[]
+    },
+    address:[{
+        type: mongoose.Types.ObjectId,
+        ref: "Address"
+    }],
+    wishlist:[{
+        type: mongoose.Types.ObjectId,
+        ref: "Product"
+    }]
+},
+    {
+    timestamps: true,
+  }
+);
 
 userSchema.pre("save", async function (next){
     const salt = await bcrypt.genSalt(10)
