@@ -1,6 +1,8 @@
-import mongoose, { mongo } from 'mongoose';
-import asyncHandler from 'express-async-handler';
+import mongoose from 'mongoose';
+
 import appError from './error.js'
+
+
 const validateMongoId = (id)=>{
    const isValid = mongoose.Types.ObjectId.isValid(id);
    if(!isValid){
