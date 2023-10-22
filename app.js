@@ -5,11 +5,12 @@ import './config/db.js'
 const app = express();
 import authRoutes from './routes/authRoutes.js'
 import { errorHandler, notFound } from './middlewares/errorHandler.js';
+import cookieParser from 'cookie-parser';
 const PORT = process.env.PORT || 3000 ;
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended : false}));
-
+app.use(cookieParser())
 
 
 app.use('/api/user', authRoutes);

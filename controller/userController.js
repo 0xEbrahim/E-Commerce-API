@@ -4,7 +4,8 @@ import appError from '../utils/error.js'
 import { ERROR, FAIL, SUCCESS } from '../utils/errorText.js';
 import {generateToken} from '../config/jwtToken.js'
 import { validateMongoId } from '../utils/validateMongoDBId.js';
-
+import { generateRefreshToken } from '../config/refreshToken.js';
+import jwt from 'jsonwebtoken';
 
 const registerUser = asyncHandler( async (req, res, next) => {
     const email = req.body.email;
@@ -29,7 +30,19 @@ const login = asyncHandler(async(req,res,next) => {
         // user Exists 
         const matchingPassword = await user.isMatchPassword(password);
         if(matchingPassword){
-           return res.status(200).json({status:SUCCESS, message:"Loggin success.", user:{
+            const refreshToken = await generateRefreshToken(user?._id);
+            await User.findByIdAndUpdate(user?._id, {
+                refreshToken:refreshToken
+            },{
+                new:true
+            })
+
+            res.cookie('refreshToken', refreshToken, {
+                httpOnly: true,
+                maxAge: 72 * 60 * 60 * 1000
+            });
+
+            return res.status(200).json({status:SUCCESS, message:"Loggin success.", user:{
             _id: user?._id,
             firstName:user?.firstName,
             lastName:user?.lastName,
@@ -42,6 +55,54 @@ const login = asyncHandler(async(req,res,next) => {
         }
     }  
 })
+
+// handle refresh token
+
+const handleRefreshToken = asyncHandler(async (req, res, next)=>{
+    const cookie = req.cookies;
+    //console.log(cookie.refreshToken);
+    if(!cookie?.refreshToken){
+        throw appError.create("No refresh token in cookies", 400, ERROR);
+    }
+    const refreshToken = cookie?.refreshToken;
+    const user = await User.findOne({refreshToken: refreshToken});
+    if(!user) throw appError.create("Invalid refresh token.",401, FAIL);
+    jwt.verify(user?.refreshToken, process.env.JWT_SECRET_KEY, asyncHandler(async (err, decoded)=> {
+        if(err || user.id != decoded?.id){
+            throw appError.create("There is something wrong with refresh token", 401, ERROR);
+        }
+        const accessToken = await generateToken(user?._id);
+        res.status(200).json({status: SUCCESS, data:{accessToken}})
+    }));
+})
+
+// log-out
+
+const logOut = asyncHandler(async (req, res, next) => {
+    const cookie = req.cookies;
+     if(!cookie?.refreshToken){
+            throw appError.create("No refresh token in cookies", 400, ERROR);
+    }
+    const refreshToken = cookie?.refreshToken;
+    const user = await User.findOne({refreshToken: refreshToken});
+    if(!user) {
+        res.clearCookie('refreshToken', {
+            httpOnly: true,
+            secure:true,
+        })
+        return res.sendStatus(204);
+    }
+    await User.findOneAndUpdate({refreshToken}, {
+        refreshToken: ""
+    })
+    res.clearCookie('refreshToken', {
+        httpOnly: true,
+        secure:true,
+    })
+    return res.sendStatus(204);
+})
+
+
 
 const getAllUsers = asyncHandler( async (req, res, next) => {
     const query = req.query;
@@ -134,5 +195,7 @@ export {
     updateSingleUser,
     blockUser,
     unBlockUser,
-    deleteMyAccount
+    deleteMyAccount,
+    handleRefreshToken,
+    logOut
 }
