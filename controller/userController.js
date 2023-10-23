@@ -5,6 +5,7 @@ import { ERROR, FAIL, SUCCESS } from '../utils/errorText.js';
 import {generateToken} from '../config/jwtToken.js'
 import { validateMongoId } from '../utils/validateMongoDBId.js';
 import { generateRefreshToken } from '../config/refreshToken.js';
+import { sendEmail } from './emailController.js';
 import jwt from 'jsonwebtoken';
 
 const registerUser = asyncHandler( async (req, res, next) => {
@@ -13,7 +14,7 @@ const registerUser = asyncHandler( async (req, res, next) => {
     if(!user){
         // create a new user
         const newUser = await User.create(req.body);
-        return res.json( {message:SUCCESS, user: newUser})
+        return res.json( {message:SUCCESS, data: newUser})
     }else{
         throw appError.create("user already exists.",400, FAIL)
         }
@@ -60,7 +61,6 @@ const login = asyncHandler(async(req,res,next) => {
 
 const handleRefreshToken = asyncHandler(async (req, res, next)=>{
     const cookie = req.cookies;
-    //console.log(cookie.refreshToken);
     if(!cookie?.refreshToken){
         throw appError.create("No refresh token in cookies", 400, ERROR);
     }
@@ -71,8 +71,8 @@ const handleRefreshToken = asyncHandler(async (req, res, next)=>{
         if(err || user.id != decoded?.id){
             throw appError.create("There is something wrong with refresh token", 401, ERROR);
         }
-        const accessToken = await generateToken(user?._id);
-        res.status(200).json({status: SUCCESS, data:{accessToken}})
+       const accessToken = await generateToken(user?._id);
+       res.status(200).json({status: SUCCESS, data:{accessToken}})
     }));
 })
 
@@ -101,7 +101,6 @@ const logOut = asyncHandler(async (req, res, next) => {
     })
     return res.sendStatus(204);
 })
-
 
 
 const getAllUsers = asyncHandler( async (req, res, next) => {
@@ -185,6 +184,45 @@ const unBlockUser = asyncHandler(async(req, res, next)=>{
     }
 })
 
+const resetPassword = asyncHandler(async(req, res, next) => {
+    const {_id} = req.user;
+    validateMongoId(_id);
+    const {password} = req.body;
+    const user = await User.findById(_id);
+    if(password){
+        const matchingPassword = await user.isMatchPassword(password);
+        if(matchingPassword){
+            throw appError.create("New password can't be the same as old one.",400,FAIL);
+        }
+        user.password = password;
+        const updatedUserWithPassword = await user.save();
+        res.status(201).json({status: SUCCESS, data: updatedUserWithPassword});
+    }else{
+        throw appError.create("Password can't be empty", 400, ERROR);
+    } 
+}
+)
+
+const forgotPasswordToken = asyncHandler(async (req, res, next) => {
+    const {email} = req.body;
+    const user = await User.findOne({email: email});
+    if(!user){
+        throw appError.create("User not found", 404, ERROR);
+    }else{
+        const token = await user.createPasswordResetToken();
+        await user.save();
+        const resetURL = `Hi, please follow this link to reset your password. this link is valid till 30 minutes from now. <a href='http://localhost:5000/api/user/reset-password/${token}'>Click Here</a>`
+        const data = {
+            to: email,
+            text:"Hey User",
+            subject: "Forgot Password link",
+            htm: resetURL,
+        }
+        sendEmail(data);
+        res.status(200).json({status: SUCCESS, token: token})
+    }
+    
+})
 
 export {
     registerUser,
@@ -197,5 +235,7 @@ export {
     unBlockUser,
     deleteMyAccount,
     handleRefreshToken,
-    logOut
+    logOut,
+    resetPassword,
+    forgotPasswordToken
 }

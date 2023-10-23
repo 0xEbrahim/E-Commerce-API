@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 
 import appError from './error.js'
+import { ERROR } from './errorText.js';
 
 
 const validateMongoId = (id)=>{
