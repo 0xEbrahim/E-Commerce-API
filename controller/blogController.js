@@ -4,7 +4,8 @@ import asyncHandler from 'express-async-handler';
 import appError from '../utils/error.js'
 import { ERROR, FAIL, SUCCESS } from '../utils/errorText.js';
 import { validateMongoId } from '../utils/validateMongoDBId.js';
-
+import cloudinaryUpload from '../utils/cloudinary.js';
+import fs from 'fs'
 
 const createBlog = asyncHandler(async (req, res, next) => {
     const newBlog = await Blog.create(req.body);
@@ -160,4 +161,24 @@ const unlikeBlog = asyncHandler(async (req, res, next) => {
     res.status(200).json({status: SUCCESS , data: disLikeTheBlog})
 }
 }) 
-export {createBlog, getAllBlogs, getSingleBlog, deleteBlog, updateBlog, likeBlog, unlikeBlog}
+
+const uploadImages = asyncHandler(async(req, res ,next) => {
+    const {id} = req.params;
+    validateMongoId(id);
+    const uploader = (pth) => cloudinaryUpload(pth, "images");
+        const url = [];
+        const files = req.files;
+        //console.log("files " , files)
+        for(const file of files){
+            const {path: pth} = file;
+            //console.log("LST => path" , pth);
+            const newPath = await uploader(pth);
+           // console.log("NEW => ",newPath)                       
+            url.push(newPath)
+            fs.unlinkSync(pth);
+        }
+    const findBlog = await Blog.findByIdAndUpdate(id, {images: url.map(file=>{return file}), },{new : true})
+    res.status(200).json({status: SUCCESS, data : findBlog})
+})
+
+export {createBlog, uploadImages,  getAllBlogs, getSingleBlog, deleteBlog, updateBlog, likeBlog, unlikeBlog}

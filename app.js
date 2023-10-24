@@ -10,6 +10,9 @@ import productRouter from './routes/productRoute.js';
 import blogRouter from "./routes/blogRoute.js"
 import prodCategoryRouter from "./routes/prodCategoryRoute.js"
 import blogCategoryRouter from "./routes/blogCategoryRoute.js"
+import couponRouter from "./routes/couponRoute.js"
+import colorRouter from "./routes/colorRoute.js"
+import brandRouter from "./routes/brandRoute.js"
 const PORT = process.env.PORT || 3000 ;
 const app = express();
 
@@ -23,7 +26,9 @@ app.use('/api/product', productRouter);
 app.use('/api/blog', blogRouter);
 app.use('/api/prod-category', prodCategoryRouter)
 app.use('/api/blog-category', blogCategoryRouter);
-
+app.use('/api/coupon', couponRouter);
+app.use('/api/color', colorRouter)
+app.use('/api/brand', brandRouter)
 app.use(notFound)
 app.use(errorHandler)
 app.listen(PORT, () => {
