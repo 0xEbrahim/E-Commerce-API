@@ -1,0 +1,1056 @@
+{
+	"info": {
+		"_postman_id": "42f04b8b-3827-4c4c-b814-8f1633929767",
+		"name": "E-Commerce",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24393606"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "forgot password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"ebrahim.elsayed622003@gmail.com\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/user/reset-password-token",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"user",
+								"reset-password-token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "unblock user",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MzNlZmJhNmRjNmRhYjVhMGExOTI5ZCIsImlhdCI6MTY5NzkwNTgwOCwiZXhwIjoxNjk4MTY1MDA4fQ.7yUzWXsA1dBT2F8gWK_Vm2y8xXHg2kt8IQ_KJkJJJmQ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/api/user/unblock-user/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"user",
+								"unblock-user",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "get all users",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "get Single User",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "delete single user",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/user/6532d7b24670788aa69a132b",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"user",
+								"6532d7b24670788aa69a132b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update profile",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MzNlZmNkNmRjNmRhYjVhMGExOTJhMCIsImlhdCI6MTY5NzkwNDM0NCwiZXhwIjoxNjk4MTYzNTQ0fQ.58fWnXb4F2gyflg0MwmN1gpqqtFkiXAQjxY1IAeiLF8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"ebrahim@email.com\",\r\n \"lastName\": \"Saeed\"\r\n }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/user/updateProfile",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"user",
+								"updateProfile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "handle refresh token",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "block user",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MzNlZmJhNmRjNmRhYjVhMGExOTI5ZCIsImlhdCI6MTY5NzkwNTgwOCwiZXhwIjoxNjk4MTY1MDA4fQ.7yUzWXsA1dBT2F8gWK_Vm2y8xXHg2kt8IQ_KJkJJJmQ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/api/user/block-user/6533efcd6dc6dab5a0a192a0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"user",
+								"block-user",
+								"6533efcd6dc6dab5a0a192a0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "change password",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/user/reset-password",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"user",
+								"reset-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "reset password",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "admin login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/user/admin-login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"admin-login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get wish list",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "save address",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MzNlZmJhNmRjNmRhYjVhMGExOTI5ZCIsImlhdCI6MTY5ODE2MzIzNiwiZXhwIjoxNjk4MjQ5NjM2fQ.HcrshE2BWqe29YefLfXa8-zGY6AgrjnsoHwElc0hRz0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"address\":\"Samara\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/user/address",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"address"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user cart",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MzNlZmJhNmRjNmRhYjVhMGExOTI5ZCIsImlhdCI6MTY5ODE2MzIzNiwiZXhwIjoxNjk4MjQ5NjM2fQ.HcrshE2BWqe29YefLfXa8-zGY6AgrjnsoHwElc0hRz0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cart\":[\r\n        {\r\n        \"_id\":\"6536462795fb2c8df571ab4d\",\r\n        \"count\":3,\r\n        \"color\":\"Red\"\r\n    },{\r\n        \"_id\":\"6536461f95fb2c8df571ab49\",\r\n        \"count\":4,\r\n        \"color\":\"Yellow\"\r\n    }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/user/cart",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"cart"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get user cart",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "empty cart",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "apply coupon",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/user/cart/apply-coupon",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"cart",
+								"apply-coupon"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create order",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "get orders",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "update order status",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "product",
+			"item": [
+				{
+					"name": "create product",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\":\"Hi\",\r\n    \"slug\":\"hHfddHH\",\r\n    \"description\":\"Hello\",\r\n    \"price\":50,\r\n    \"quantity\":50\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/product/add-product",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"product",
+								"add-product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get Product",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "get all products",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "update product",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/product/65361cc2e0df8331ab346ac",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"product",
+								"65361cc2e0df8331ab346ac"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete product",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/product/65361cc2e0df8331ab341ac6",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"product",
+								"65361cc2e0df8331ab341ac6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add to wishlist",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "rate product",
+					"request": {
+						"method": "PUT",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "upload product image",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MzNlZmJhNmRjNmRhYjVhMGExOTI5ZCIsImlhdCI6MTY5ODE1MjgwMiwiZXhwIjoxNjk4MjM5MjAyfQ.8VF2lsmZa0X1l8afPnzUi45hic4-99yddkxqXGVaYO8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "images",
+									"type": "file",
+									"src": "/C:/Users/ebrah/Downloads/images.jpeg"
+								},
+								{
+									"key": "images",
+									"type": "file",
+									"src": [],
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/product/upload/6536462795fb2c8df571ab4d",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"product",
+								"upload",
+								"6536462795fb2c8df571ab4d"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "blog",
+			"item": [
+				{
+					"name": "create blog",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MzNlZmJhNmRjNmRhYjVhMGExOTI5ZCIsImlhdCI6MTY5ODA3NjgxNSwiZXhwIjoxNjk4MTYzMjE1fQ.t9m4wxQmSiuXjt_TzLHc_A8uG-nSd9k8V7kigqRg27Y",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\":\"not blog\",\r\n    \"description\":\"Good Blog\",\r\n    \"category\":\"Drama\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/blog/create-blog",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"blog",
+								"create-blog"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all blogs",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "get single blog",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "delete blog",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/blog/653698b711d52af3cdf131df",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"blog",
+								"653698b711d52af3cdf131df"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update blog",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MzNlZmJhNmRjNmRhYjVhMGExOTI5ZCIsImlhdCI6MTY5ODA3NjgxNSwiZXhwIjoxNjk4MTYzMjE1fQ.t9m4wxQmSiuXjt_TzLHc_A8uG-nSd9k8V7kigqRg27Y",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\":\"Title\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/blog/653698be11d52af3cdf131e4",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"blog",
+								"653698be11d52af3cdf131e4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "like blog",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MzNlZmNkNmRjNmRhYjVhMGExOTJhMCIsImlhdCI6MTY5ODA4MDM1OSwiZXhwIjoxNjk4MTY2NzU5fQ.t6p72RBfLk0qq_pu8w8i3D24XdfUh06hQurly961iOQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/blog/like/6536a71aeb68d7b705786226",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"blog",
+								"like",
+								"6536a71aeb68d7b705786226"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "dislike",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "upload images",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/blog/upload/6536462795fb2c8df571ab4d",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"blog",
+								"upload",
+								"6536462795fb2c8df571ab4d"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "product Category",
+			"item": [
+				{
+					"name": "create category",
+					"request": {
+						"method": "POST",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "update category",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MzNlZmJhNmRjNmRhYjVhMGExOTI5ZCIsImlhdCI6MTY5ODE0MTcyMCwiZXhwIjoxNjk4MjI4MTIwfQ.EXQO3AGEgNvfg5WP-e5GqGH4euXDFgIT2BNjNwWgjGA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\":\"Accessories\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/prod-category/653797e1adb2316fc1257f49",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"prod-category",
+								"653797e1adb2316fc1257f49"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete category",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MzNlZmJhNmRjNmRhYjVhMGExOTI5ZCIsImlhdCI6MTY5ODE0MTcyMCwiZXhwIjoxNjk4MjI4MTIwfQ.EXQO3AGEgNvfg5WP-e5GqGH4euXDFgIT2BNjNwWgjGA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/prod-category/653797e1adb2316fc1257f47",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"prod-category",
+								"653797e1adb2316fc1257f47"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all cate",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MzNlZmJhNmRjNmRhYjVhMGExOTI5ZCIsImlhdCI6MTY5ODE0MTcyMCwiZXhwIjoxNjk4MjI4MTIwfQ.EXQO3AGEgNvfg5WP-e5GqGH4euXDFgIT2BNjNwWgjGA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/prod-category/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"prod-category",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get single product",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MzNlZmJhNmRjNmRhYjVhMGExOTI5ZCIsImlhdCI6MTY5ODE0MTcyMCwiZXhwIjoxNjk4MjI4MTIwfQ.EXQO3AGEgNvfg5WP-e5GqGH4euXDFgIT2BNjNwWgjGA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/prod-category/65379b58a37724c66c882d07",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"prod-category",
+								"65379b58a37724c66c882d07"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "blog Category",
+			"item": [
+				{
+					"name": "create category",
+					"request": {
+						"method": "POST",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "update category",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/blog-category/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"blog-category",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete category",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/blog-category/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"blog-category",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all cate",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MzNlZmJhNmRjNmRhYjVhMGExOTI5ZCIsImlhdCI6MTY5ODE0MTcyMCwiZXhwIjoxNjk4MjI4MTIwfQ.EXQO3AGEgNvfg5WP-e5GqGH4euXDFgIT2BNjNwWgjGA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/blog-category/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"blog-category",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get single product",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/blog-category/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"blog-category",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "coupon",
+			"item": [
+				{
+					"name": "create coupon",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"EUNE\",\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/coupon/create",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"coupon",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all coupons",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "update coupon",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MzNlZmJhNmRjNmRhYjVhMGExOTI5ZCIsImlhdCI6MTY5ODE1MjgwMiwiZXhwIjoxNjk4MjM5MjAyfQ.8VF2lsmZa0X1l8afPnzUi45hic4-99yddkxqXGVaYO8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"EBRAHIM\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/coupon/6537c1fe6bd949e9c204472a",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"coupon",
+								"6537c1fe6bd949e9c204472a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get single coupon",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MzNlZmJhNmRjNmRhYjVhMGExOTI5ZCIsImlhdCI6MTY5ODE1MjgwMiwiZXhwIjoxNjk4MjM5MjAyfQ.8VF2lsmZa0X1l8afPnzUi45hic4-99yddkxqXGVaYO8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/coupon/6537c1fe6bd949e9c204472a",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"coupon",
+								"6537c1fe6bd949e9c204472a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete coupon",
+					"request": {
+						"method": "DELETE",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
