@@ -7,7 +7,7 @@ import { validateMongoId } from '../utils/validateMongoDBId.js';
 import { generateRefreshToken } from '../config/refreshToken.js';
 import { sendEmail } from './emailController.js';
 import jwt from 'jsonwebtoken';
-
+import crypto from 'crypto'
 const registerUser = asyncHandler( async (req, res, next) => {
     const email = req.body.email;
     const user = await User.findOne({email:email});
@@ -184,7 +184,7 @@ const unBlockUser = asyncHandler(async(req, res, next)=>{
     }
 })
 
-const resetPassword = asyncHandler(async(req, res, next) => {
+const changePassword = asyncHandler(async(req, res, next) => {
     const {_id} = req.user;
     validateMongoId(_id);
     const {password} = req.body;
@@ -210,6 +210,7 @@ const forgotPasswordToken = asyncHandler(async (req, res, next) => {
         throw appError.create("User not found", 404, ERROR);
     }else{
         const token = await user.createPasswordResetToken();
+        //console.log(token)
         await user.save();
         const resetURL = `Hi, please follow this link to reset your password. this link is valid till 30 minutes from now. <a href='http://localhost:5000/api/user/reset-password/${token}'>Click Here</a>`
         const data = {
@@ -224,6 +225,29 @@ const forgotPasswordToken = asyncHandler(async (req, res, next) => {
     
 })
 
+const resetPassword = asyncHandler(async(req, res, next) => {
+    const {password} = req.body;
+    const { token } = req.params;
+    const hashedToken = crypto
+    .createHash("sha256")
+    .update(token)
+    .digest("hex");
+
+    const user = await User.findOne({
+        passwordResetToken: hashedToken,
+       passwordResetExpires: { $gt: Date.now() },
+      });
+    if(!user){
+        throw appError.create("Invalid token", 401, ERROR);
+    }else{
+        user.password = password;
+        user.passwordResetToken = undefined;
+        user.passwordResetExpires = undefined;
+        await user.save();
+        res.status(200).json({status: SUCCESS , data: user})
+    }
+})
+
 export {
     registerUser,
     login,
@@ -236,6 +260,7 @@ export {
     deleteMyAccount,
     handleRefreshToken,
     logOut,
-    resetPassword,
-    forgotPasswordToken
+    changePassword,
+    forgotPasswordToken,
+    resetPassword
 }

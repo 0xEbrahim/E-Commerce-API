@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import bcrypt from 'bcrypt'
+import bcrypt, { hash } from 'bcrypt'
 import crypto from 'crypto'
 
 // Declare the Schema of the Mongo model
@@ -82,13 +82,17 @@ userSchema.methods.createPasswordResetToken = async function(){
     const resetToken = crypto
                     .randomBytes(32)
                     .toString("hex")
+                    
     this.passwordResetToken = crypto
-                            .createHash('sha256')
-                            .update(resetToken)
-                            .digest("hex")
+                        .createHash('sha256')
+                        .update(resetToken)
+                        .digest("hex")
+   
+    //console.log(resetToken, this.passwordResetToken, hashed);
     this.passwordResetExpires = Date.now() + 30 * 60 * 1000; // 30 minutes
     return resetToken;
 }
+
 
 //Export the model
 export default mongoose.model('User', userSchema)

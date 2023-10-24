@@ -7,6 +7,7 @@ import authRoutes from './routes/authRoutes.js'
 import { errorHandler, notFound } from './middlewares/errorHandler.js';
 import cookieParser from 'cookie-parser';
 import productRouter from './routes/productRoute.js';
+import blogRouter from "./routes/blogRoute.js"
 const PORT = process.env.PORT || 3000 ;
 const app = express();
 
@@ -17,6 +18,7 @@ app.use(morgan("dev"))
 
 app.use('/api/user', authRoutes);
 app.use('/api/product', productRouter);
+app.use('/api/blog', blogRouter);
 app.use(notFound)
 app.use(errorHandler)
 app.listen(PORT, () => {
