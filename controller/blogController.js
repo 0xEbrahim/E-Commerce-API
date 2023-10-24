@@ -26,7 +26,9 @@ const getAllBlogs = asyncHandler(async (req, res, next) => {
 const getSingleBlog = asyncHandler(async (req, res, next) => {
     const {id} = req.params;
     validateMongoId(id);
-    const blog = await Blog.findById(id);
+    const blog = await Blog.findById(id)
+    .populate('likes')
+    .populate('dislikes');
     if(!blog){
         throw appError.create("Resource not found.", 404 , ERROR);
     }else{
@@ -73,18 +75,18 @@ const likeBlog = asyncHandler(async (req, res, next) => {
        );
 
        if(isDisLiked){
-       await Blog.findByIdAndUpdate(id, 
+        LikeTheBlog = await Blog.findByIdAndUpdate(id, 
             {$pull:{
                 dislikes:loginUserId
             },
-            isDisLiked:false
+            isDisliked:false
         }, 
             {
                 new: true
             })
        }
        if(isLiked){
-        await Blog.findByIdAndUpdate(id, 
+        LikeTheBlog = await Blog.findByIdAndUpdate(id, 
             {$pull:{
                 likes:loginUserId
             },
@@ -117,7 +119,7 @@ const unlikeBlog = asyncHandler(async (req, res, next) => {
     if(!blog){
         throw appError.create("Resource not found", 404, ERROR);
     }else{
-       const isDisLiked =  blog?.dislikes;
+       const isDisLiked =  blog?.isDisliked;
        const isLiked = blog?.likes?.find(
         userId => userId?.toString() === loginUserId?.toString()
        );
@@ -133,21 +135,23 @@ const unlikeBlog = asyncHandler(async (req, res, next) => {
             })
        }
        if(isDisLiked){
-        await Blog.findByIdAndUpdate(id, 
-            {$pull:{
+        disLikeTheBlog = await Blog.findByIdAndUpdate(id, 
+            {$pull:
+                {
                 dislikes:loginUserId
             },
-            isDisLiked:false
+            isDisliked:false
         }, 
             {
                 new: true
             })
        }else{
         disLikeTheBlog = await Blog.findByIdAndUpdate(id, 
-            {$push:{
-                dislikes:loginUserId
+            {
+                $push:{
+                    dislikes:loginUserId
             },
-            isDisLiked:true
+            isDisliked:true
         }, 
             {
                 new: true

@@ -1,4 +1,5 @@
 import Product from "../models/productModel.js";
+import User from '../models/userModel.js'
 import AsyncHandler from "express-async-handler";
 import { ERROR, FAIL, SUCCESS } from '../utils/errorText.js';
 import appError from '../utils/error.js';
@@ -96,5 +97,18 @@ const getSingleProduct = AsyncHandler(async (req, res, next) => {
     }
 })
 
+const addToWishlist = AsyncHandler(async (req, res, next) => {
+    const {_id : id} = req.user;
+    validateMongoId(id);
+    const {id : productId} = req.params;
+    validateMongoId(productId);
+    const user = await User.findByIdAndUpdate(id,{$push: {wishlist : productId}}, {new:true});
+    const product = await Product.findById(productId);
+    if(!user || !product){
+        throw appError.create("Resource not found.", 404 , ERROR);
+    }else{
+        res.status(200).json({status: SUCCESS, data: user})
+    }
+})
 
-export {createProduct, getSingleProduct, getAllProducts, updateProduct, deleteProduct}
+export {createProduct, getSingleProduct, getAllProducts, updateProduct, deleteProduct, addToWishlist}

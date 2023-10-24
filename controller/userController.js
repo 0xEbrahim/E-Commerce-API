@@ -8,6 +8,8 @@ import { generateRefreshToken } from '../config/refreshToken.js';
 import { sendEmail } from './emailController.js';
 import jwt from 'jsonwebtoken';
 import crypto from 'crypto'
+
+
 const registerUser = asyncHandler( async (req, res, next) => {
     const email = req.body.email;
     const user = await User.findOne({email:email});
@@ -110,7 +112,7 @@ const getAllUsers = asyncHandler( async (req, res, next) => {
     const users = await User
     .find({}, {__v : false})
     .limit(limit)
-    .skip(((page - 1) * limit));
+    .skip(((page - 1) * limit)).populate('wishlist');
 
     res.json({status:SUCCESS, data : {users}});
 }
@@ -119,7 +121,7 @@ const getAllUsers = asyncHandler( async (req, res, next) => {
 const getSingleUser  = asyncHandler(async(req, res, next)=>{
     const {id} = req.params;
     validateMongoId(id)
-    const user = await User.findById(id);
+    const user = await User.findById(id).populate('wishlist');
     if(!user){
         throw appError.create("Invalid user id.",404,ERROR);
     }else{
