@@ -29,8 +29,6 @@
 
 **eCommerce** it's an open source (test scenario) software made to create a easy and simple "Shop" API, where you have two micro services, one the **Products API** that stores and handles everything Related to Stock and Products. And the **Purchase API** where you can create orders (cart's) and checkout items.
 
-Hello, this is Bing. I can help you generate a readme file for the GitHub repository you provided. Here is a possible readme file:
-
 # E-Commerce-API
 
 E-Commerce-API is a simple RESTful API for purchases and products, built with Node.js, Express, and MongoDB.
