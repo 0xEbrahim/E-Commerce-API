@@ -29,3 +29,29 @@
 
 **eCommerce** it's an open source (test scenario) software made to create a easy and simple "Shop" API, where you have two micro services, one the **Products API** that stores and handles everything Related to Stock and Products. And the **Purchase API** where you can create orders (cart's) and checkout items.
 
+Hello, this is Bing. I can help you generate a readme file for the GitHub repository you provided. Here is a possible readme file:
+
+# E-Commerce-API
+
+E-Commerce-API is a simple RESTful API for purchases and products, built with Node.js, Express, and MongoDB.
+
+## Features
+
+- Products API: handles everything related to stock and products, such as adding, listing, editing, deleting, and updating products.
+- Purchase API: handles everything related to orders and carts, such as creating, viewing, removing, adding items, removing items, and checking out.
+
+## Installation
+
+To run this project, you need to have Node.js and MongoDB installed on your system.
+
+1. Clone this repository: `git clone https://github.com/0xEbrahim/E-Commerce-API.git`
+2. Install the dependencies: `npm install`
+3. Start the server: `npm start`
+
+## Usage
+
+The API endpoints are documented in the [Postman collection](https://github.com/0xEbrahim/E-Commerce-API/blob/main/E-Commerce.postman_collection.json). You can import it to Postman and test the API.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](
