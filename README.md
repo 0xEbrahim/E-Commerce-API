@@ -52,6 +52,4 @@ To run this project, you need to have Node.js and MongoDB installed on your syst
 
 The API endpoints are documented in the [Postman collection](https://github.com/0xEbrahim/E-Commerce-API/blob/main/E-Commerce.postman_collection.json). You can import it to Postman and test the API.
 
-## License
 
-This project is licensed under the MIT License - see the [LICENSE](
